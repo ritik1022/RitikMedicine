@@ -2,6 +2,8 @@ package com.OnlineMedicalShop.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -54,21 +56,14 @@ public class AdminController {
     }
     
     @RequestMapping("/createadminaccount")
-    public Boolean createAccount(@RequestBody Admin a)throws EmailIdFormatException, EmailAlreadyExistException {
-    	String tempEmailId=a.getEmail();
-        if (tempEmailId != null && !"".equals(tempEmailId)) {
-            Boolean userObj = adminservice.checkEntry(tempEmailId);
-            if (userObj != null) {
-                throw new EmailAlreadyExistException("Admin with " + tempEmailId + " is already Exist");
-            }
+    public Boolean createAccount(@RequestBody @Valid Admin a) {
+        adminrepo.save(a);
+        if(adminservice.checkEntry(a.getEmail())) {
+        return true;
         }
-
-        if(tempEmailId.isEmpty() || tempEmailId.isBlank() || !tempEmailId.matches("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")) {
-            throw new EmailIdFormatException("Email Id is in Wrong Format");
+        else {
+            return false;
         }
-    	adminrepo.save(a);
-		return true;
-        
     }
     @GetMapping("/getallMedicinedetails")
     public List<Medicine> getall(){
