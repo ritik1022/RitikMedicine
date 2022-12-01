@@ -20,11 +20,13 @@ import com.OnlineMedicalShop.exception.EmailIdFormatException;
 import com.OnlineMedicalShop.model.Admin;
 import com.OnlineMedicalShop.model.Medicine;
 import com.OnlineMedicalShop.model.Payment;
+import com.OnlineMedicalShop.model.Signup;
 import com.OnlineMedicalShop.repository.AdminRepository;
 import com.OnlineMedicalShop.repository.medicineRepository;
 import com.OnlineMedicalShop.service.AdminService;
 import com.OnlineMedicalShop.service.MedicineService;
 import com.OnlineMedicalShop.repository.PaymentRepository;
+import com.OnlineMedicalShop.repository.SignupRepository;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders = "*")
@@ -43,6 +45,9 @@ public class AdminController {
     
     @Autowired
     PaymentRepository paymentrepo;
+    @Autowired
+    SignupRepository signuprepo;
+    
     
     @RequestMapping("/adminlogin")
     public Boolean adminlogin(@RequestBody Admin a) {
@@ -96,4 +101,8 @@ public class AdminController {
     public List<Payment> allpayment() {
         return paymentrepo.findAll();
     }
+   @GetMapping("/allusers")
+   public List<Signup> allusers() {
+       return signuprepo.findAll();
+   }
 }

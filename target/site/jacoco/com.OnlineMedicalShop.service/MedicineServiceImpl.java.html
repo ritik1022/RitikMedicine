@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MedicineServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">OnlineMedicineShoppingSystem</a> &gt; <a href="index.source.html" class="el_package">com.OnlineMedicalShop.service</a> &gt; <span class="el_source">MedicineServiceImpl.java</span></div><h1>MedicineServiceImpl.java</h1><pre class="source lang-java linenums">package com.OnlineMedicalShop.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.OnlineMedicalShop.model.Medicine;
+import com.OnlineMedicalShop.repository.medicineRepository;
+
+@Service
+<span class="fc" id="L12">public class MedicineServiceImpl implements MedicineService{</span>
+    @Autowired
+    medicineRepository medrepo;
+
+	@Override
+	public Medicine addMedicine(Medicine p) {
+		// TODO Auto-generated method stub
+<span class="nc" id="L19">		return medrepo.save(p);</span>
+	}
+
+	@Override
+	public List&lt;Medicine&gt; getAllMedicine() {
+		// TODO Auto-generated method stub
+<span class="nc" id="L25">		return medrepo.findAll();</span>
+	}
+
+	@Override
+	public boolean updateMedicine(Medicine f, int pid) {
+<span class="nc" id="L30">		Medicine f1 = medrepo.getById(pid);</span>
+		
+<span class="nc bnc" id="L32" title="All 2 branches missed.">		if(f.getMedicineDescription()!=null) {</span>
+<span class="nc" id="L33">			f1.setMedicineDescription(f.getMedicineDescription());</span>
+		}
+<span class="nc bnc" id="L35" title="All 2 branches missed.">		if(f.getMedicineName()!=null) {</span>
+<span class="nc" id="L36">			f1.setMedicineName(f.getMedicineName());</span>
+		}
+		
+<span class="nc bnc" id="L39" title="All 2 branches missed.">		if(f.getMedicinePrice()!=0) {</span>
+<span class="nc" id="L40">			f1.setMedicinePrice(f.getMedicinePrice());</span>
+		}
+<span class="nc bnc" id="L42" title="All 2 branches missed.">		if(f.getInstock()!=null) {</span>
+<span class="nc" id="L43">			f1.setInstock(f.getInstock());</span>
+		}
+		
+<span class="nc" id="L46">		medrepo.save(f1);</span>
+<span class="nc" id="L47">		return true;</span>
+	}
+
+	@Override
+	public Boolean deleteMedicine(int pid) {
+<span class="nc" id="L52">		medrepo.deleteById(pid);</span>
+<span class="nc" id="L53">		return true;</span>
+	}
+
+    
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

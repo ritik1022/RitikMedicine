@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AdminController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">OnlineMedicineShoppingSystem</a> &gt; <a href="index.source.html" class="el_package">com.OnlineMedicalShop.controller</a> &gt; <span class="el_source">AdminController.java</span></div><h1>AdminController.java</h1><pre class="source lang-java linenums">package com.OnlineMedicalShop.controller;
+
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.OnlineMedicalShop.exception.EmailAlreadyExistException;
+import com.OnlineMedicalShop.exception.EmailIdFormatException;
+import com.OnlineMedicalShop.model.Admin;
+import com.OnlineMedicalShop.model.Medicine;
+import com.OnlineMedicalShop.model.Payment;
+import com.OnlineMedicalShop.repository.AdminRepository;
+import com.OnlineMedicalShop.repository.medicineRepository;
+import com.OnlineMedicalShop.service.AdminService;
+import com.OnlineMedicalShop.service.MedicineService;
+import com.OnlineMedicalShop.repository.PaymentRepository;
+
+@RestController
+@CrossOrigin(origins = &quot;http://localhost:4200&quot;,allowedHeaders = &quot;*&quot;)
+<span class="fc" id="L31">public class AdminController {</span>
+    @Autowired
+    AdminService adminservice;
+    
+    @Autowired
+    AdminRepository adminrepo;
+    
+    @Autowired
+    MedicineService medicineservice;
+    
+    @Autowired
+    medicineRepository medicinerepo;
+    
+    @Autowired
+    PaymentRepository paymentrepo;
+    
+    @RequestMapping(&quot;/adminlogin&quot;)
+    public Boolean adminlogin(@RequestBody Admin a) {
+        
+<span class="nc bnc" id="L50" title="All 2 branches missed.">        if(adminservice.verifyAdmin(a.getEmail(), a.getPassword())){</span>
+<span class="nc" id="L51">            return true;</span>
+        }
+        else{
+<span class="nc" id="L54">            return false;</span>
+        }
+    }
+    
+    @RequestMapping(&quot;/createadminaccount&quot;)
+    public Boolean createAccount(@RequestBody @Valid Admin a) {
+<span class="nc" id="L60">        adminrepo.save(a);</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">        if(adminservice.checkEntry(a.getEmail())) {</span>
+<span class="nc" id="L62">        return true;</span>
+        }
+        else {
+<span class="nc" id="L65">            return false;</span>
+        }
+    }
+    @GetMapping(&quot;/getallMedicinedetails&quot;)
+    public List&lt;Medicine&gt; getall(){
+<span class="nc" id="L70">        return medicineservice.getAllMedicine();</span>
+    }
+    @PostMapping(&quot;/addmedicine&quot;)
+    public Boolean addMedicine(@RequestBody Medicine f) {
+<span class="nc" id="L74">        System.out.println(&quot;medicine&quot;);</span>
+<span class="nc" id="L75">        Medicine f1 = medicineservice.addMedicine(f);</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">        if(f1!=null) {</span>
+<span class="nc" id="L77">            return true;</span>
+        }
+        else {
+<span class="nc" id="L80">            return false;</span>
+        }
+    }
+    @PutMapping(&quot;/updatemedicine/{id}&quot;)
+    public Boolean updateMedicine(@PathVariable int id,@RequestBody Medicine f) {
+<span class="nc" id="L85">        return medicineservice.updateMedicine(f, id);</span>
+    }
+    
+    @DeleteMapping(&quot;/deletemedicine/{id}&quot;)
+    public Boolean deleteMedicine(@PathVariable int id) {
+<span class="nc" id="L90">        return medicineservice.deleteMedicine(id);</span>
+    }
+
+
+
+   @GetMapping(&quot;/alltransactions&quot;)
+    public List&lt;Payment&gt; allpayment() {
+<span class="nc" id="L97">        return paymentrepo.findAll();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

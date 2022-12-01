@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Cart.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">OnlineMedicineShoppingSystem</a> &gt; <a href="index.source.html" class="el_package">com.OnlineMedicalShop.model</a> &gt; <span class="el_source">Cart.java</span></div><h1>Cart.java</h1><pre class="source lang-java linenums">package com.OnlineMedicalShop.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+
+
+
+@Entity
+@Table(name=&quot;cart&quot;)
+<span class="nc" id="L13">public class Cart {</span>
+
+    @Id
+    private int id;
+    private int quantity;
+    private float prize;
+    @OneToOne
+    private Medicine medicine;
+	public int getId() {
+<span class="nc" id="L22">		return id;</span>
+	}
+	public void setId(int id) {
+<span class="nc" id="L25">		this.id = id;</span>
+<span class="nc" id="L26">	}</span>
+	public int getQuantity() {
+<span class="nc" id="L28">		return quantity;</span>
+	}
+	public void setQuantity(int quantity) {
+<span class="nc" id="L31">		this.quantity = quantity;</span>
+<span class="nc" id="L32">	}</span>
+	public float getPrize() {
+<span class="nc" id="L34">		return prize;</span>
+	}
+	public void setPrize(float prize) {
+<span class="nc" id="L37">		this.prize = prize;</span>
+<span class="nc" id="L38">	}</span>
+	public Medicine getMedicine() {
+<span class="nc" id="L40">		return medicine;</span>
+	}
+	public void setMedicine(Medicine medicine) {
+<span class="nc" id="L43">		this.medicine = medicine;</span>
+<span class="nc" id="L44">	}</span>
+  
+    
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

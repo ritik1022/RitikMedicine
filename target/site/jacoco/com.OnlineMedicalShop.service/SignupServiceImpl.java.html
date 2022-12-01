@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SignupServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">OnlineMedicineShoppingSystem</a> &gt; <a href="index.source.html" class="el_package">com.OnlineMedicalShop.service</a> &gt; <span class="el_source">SignupServiceImpl.java</span></div><h1>SignupServiceImpl.java</h1><pre class="source lang-java linenums">package com.OnlineMedicalShop.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.OnlineMedicalShop.model.Signup;
+import com.OnlineMedicalShop.repository.SignupRepository;
+
+@Service
+<span class="fc" id="L12">public class SignupServiceImpl implements signupService{</span>
+    @Autowired
+    SignupRepository sur;
+    public Boolean verifyUser(String email, String password){
+<span class="nc" id="L16">		List&lt;Signup&gt; s = sur.findAll();</span>
+<span class="nc bnc" id="L17" title="All 2 branches missed.">		for(Signup su : s){</span>
+<span class="nc bnc" id="L18" title="All 4 branches missed.">			if(su.getEmail().equals(email) &amp;&amp; su.getPassword().equals(password)) {</span>
+<span class="nc" id="L19">				return true;</span>
+			}
+<span class="nc" id="L21">		}</span>
+<span class="nc" id="L22">		return false;</span>
+	}
+ public Boolean checkEntry(String email) {
+<span class="nc" id="L25">		List&lt;Signup&gt; s = sur.findAll();</span>
+<span class="nc bnc" id="L26" title="All 2 branches missed.">		for(Signup su : s){</span>
+<span class="nc bnc" id="L27" title="All 2 branches missed.">			if(su.getEmail().equals(email) ) { </span>
+<span class="nc" id="L28">				return true;</span>
+			}
+<span class="nc" id="L30">		}</span>
+<span class="nc" id="L31">		return false;</span>
+	}
+ public Boolean updateUser(int id,Signup su) {
+<span class="nc" id="L34">		Signup s = sur.getById(id);</span>
+<span class="nc bnc" id="L35" title="All 2 branches missed.">		if(su.getPassword()!=null) {</span>
+<span class="nc" id="L36">			s.setPassword(su.getPassword());</span>
+		}
+<span class="nc bnc" id="L38" title="All 2 branches missed.">		if(su.getEmail()!=null) {</span>
+<span class="nc" id="L39">			s.setEmail(su.getEmail());</span>
+		}
+<span class="nc bnc" id="L41" title="All 2 branches missed.">		if(su.getName()!=null) {</span>
+<span class="nc" id="L42">			s.setName(su.getName());</span>
+		}
+<span class="nc bnc" id="L44" title="All 2 branches missed.">		if(su.getMobilenumber()!=0) {</span>
+<span class="nc" id="L45">			s.setMobilenumber(su.getMobilenumber());</span>
+		}
+<span class="nc bnc" id="L47" title="All 2 branches missed.">		if(su.getAddress()!=null){</span>
+<span class="nc" id="L48">			s.setAddress(su.getAddress());</span>
+		}
+		
+		
+<span class="nc" id="L52">		sur.save(s);</span>
+<span class="nc" id="L53">		return true;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

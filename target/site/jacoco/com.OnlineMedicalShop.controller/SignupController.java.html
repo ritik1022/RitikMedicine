@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SignupController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">OnlineMedicineShoppingSystem</a> &gt; <a href="index.source.html" class="el_package">com.OnlineMedicalShop.controller</a> &gt; <span class="el_source">SignupController.java</span></div><h1>SignupController.java</h1><pre class="source lang-java linenums">package com.OnlineMedicalShop.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.OnlineMedicalShop.model.LoginUser;
+import com.OnlineMedicalShop.model.Medicine;
+import com.OnlineMedicalShop.model.Payment;
+import com.OnlineMedicalShop.model.Signup;
+import com.OnlineMedicalShop.repository.medicineRepository;
+import com.OnlineMedicalShop.service.MedicineService;
+import com.OnlineMedicalShop.service.signupService;
+import com.OnlineMedicalShop.repository.PaymentRepository;
+import com.OnlineMedicalShop.repository.SignupRepository;
+
+
+@RestController
+@CrossOrigin(origins = &quot;http://localhost:4200&quot;,allowedHeaders = &quot;*&quot;)
+<span class="fc" id="L31">public class SignupController {</span>
+    @Autowired
+    SignupRepository surepo;
+    @Autowired
+    signupService sus;
+    @Autowired
+    medicineRepository medrepo;
+    @Autowired
+    MedicineService medservice;
+    @Autowired
+    PaymentRepository paymentrepo;
+    
+    @RequestMapping(&quot;/signup&quot;)
+    public Boolean create(@RequestBody Signup su) {
+<span class="nc" id="L45">        System.out.println(&quot;in signup&quot;);</span>
+<span class="nc" id="L46">        surepo.save(su);</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        if(sus.checkEntry(su.getEmail())) {</span>
+<span class="nc" id="L48">            return true;</span>
+            }
+            else {
+<span class="nc" id="L51">                return false;</span>
+            }
+    }
+    @RequestMapping(value =&quot;/signin&quot;, method= RequestMethod.POST)
+    public Boolean userlogin(@RequestBody LoginUser lu) {
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        if(sus.verifyUser(lu.getEmail(), lu.getPassword())){</span>
+<span class="nc" id="L57">            return true;</span>
+        }
+        else{
+<span class="nc" id="L60">            return false;</span>
+        }
+    }
+    @PutMapping(&quot;/updateuser/{id}&quot;)
+    public Boolean updateuser(@PathVariable int id,@RequestBody Signup su) {
+<span class="nc" id="L65">        return sus.updateUser(id, su);</span>
+    }
+    @GetMapping(&quot;/showallmed&quot;)
+    public List&lt;Medicine&gt; showallmedicine(){
+<span class="nc" id="L69">        return medrepo.findAllbyInstock();</span>
+    }
+
+
+
+   @GetMapping(&quot;products/{id}&quot;)
+    public ResponseEntity&lt;Medicine&gt; getProductById(@PathVariable int id) {
+<span class="nc" id="L76">        Medicine product = medrepo.findById(id)</span>
+<span class="nc" id="L77">                .orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Oops! Nothing found.&quot;));</span>
+<span class="nc" id="L78">        return ResponseEntity.ok(product);</span>
+    }
+    @GetMapping(&quot;products/search/{keyword}&quot;)
+    public List&lt;Medicine&gt; getSearchProducts(@PathVariable String keyword) {
+<span class="nc" id="L82">        return medrepo.homeSearch(keyword);</span>
+    }
+    
+    @GetMapping(&quot;/medicine/sort/price&quot;)
+    public List&lt;Medicine&gt; sortByPrice(){
+<span class="nc" id="L87">        return medrepo.sortbyMedicinePrice();</span>
+    }
+
+
+
+   @GetMapping(&quot;/Medicine/sort/price/dsc&quot;)
+    public List&lt;Medicine&gt; sortByPriceDsc(){
+<span class="nc" id="L94">        return medrepo.sortbyPriceHigh();</span>
+    }
+    
+   
+    @PostMapping(&quot;/payment&quot;)
+    public boolean paymentGateWay(@RequestBody Payment payment) {
+<span class="nc" id="L100">        paymentrepo.save(payment);</span>
+<span class="nc" id="L101">        return true;</span>
+        
+    }
+    }
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

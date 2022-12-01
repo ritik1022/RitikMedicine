@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Medicine.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">OnlineMedicineShoppingSystem</a> &gt; <a href="index.source.html" class="el_package">com.OnlineMedicalShop.model</a> &gt; <span class="el_source">Medicine.java</span></div><h1>Medicine.java</h1><pre class="source lang-java linenums">package com.OnlineMedicalShop.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Table(name=&quot;medicine&quot;)
+<span class="fc" id="L12">public class Medicine {</span>
+
+    @Id
+    
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   	public int medicineId;
+    @NotNull(message = &quot;medicine Name can not be empty&quot;)
+    public String medicineName;
+  
+   	public float medicinePrice;
+   	public String medicineDescription;
+   	public String instock; 
+	public int getMedicineId() {
+<span class="nc" id="L25">		return medicineId;</span>
+	}
+	public void setMedicineId(int medicineId) {
+<span class="nc" id="L28">		this.medicineId = medicineId;</span>
+<span class="nc" id="L29">	 }</span>
+	public String getMedicineName() {
+<span class="nc" id="L31">		return medicineName;</span>
+	}
+	public void setMedicineName(String medicineName) {
+<span class="nc" id="L34">		this.medicineName = medicineName;</span>
+<span class="nc" id="L35">	}</span>
+	public float getMedicinePrice() {
+<span class="nc" id="L37">		return medicinePrice;</span>
+	}
+	public void setMedicinePrice(float medicinePrice) {                                                                                                
+<span class="nc" id="L40">		this.medicinePrice = medicinePrice;</span>
+<span class="nc" id="L41">	}</span>
+	public String getMedicineDescription() {
+<span class="nc" id="L43">		return medicineDescription;</span>
+	}
+	public void setMedicineDescription(String medicineDescription) {
+<span class="nc" id="L46">		this.medicineDescription = medicineDescription;</span>
+<span class="nc" id="L47">	}</span>
+	public String getInstock() {
+<span class="nc" id="L49">		return instock;</span>
+	}
+	public void setInstock(String medicineAvailability) {
+<span class="nc" id="L52">		this.instock = medicineAvailability;</span>
+<span class="nc" id="L53">	}</span>
+   	
+
+
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

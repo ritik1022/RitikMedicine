@@ -14,7 +14,7 @@ public class Payment {
 	public int id;
 	public String name;
 	public String address;
-	public long mobilenumber;
+	public String mobilenumber;
 	public float amount;
 	public int getId() {
 		return id;
@@ -34,10 +34,10 @@ public class Payment {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public long getMobilenumber() {
+	public String getMobilenumber() {
 		return mobilenumber;
 	}
-	public void setMobilenumber(long mobilenumber) {
+	public void setMobilenumber(String mobilenumber) {
 		this.mobilenumber = mobilenumber;
 	}
 	public float getAmount() {

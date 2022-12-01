@@ -1,0 +1,6 @@
+projectKey=com.:OnlineMedicineShoppingSystem
+serverUrl=http://localhost:9000
+serverVersion=9.7.1.62043
+dashboardUrl=http://localhost:9000/dashboard?id=com.%3AOnlineMedicineShoppingSystem
+ceTaskId=AYTG3TPAJ6SFPNc3vqLl
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYTG3TPAJ6SFPNc3vqLl

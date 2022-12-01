@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Admin.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">OnlineMedicineShoppingSystem</a> &gt; <a href="index.source.html" class="el_package">com.OnlineMedicalShop.model</a> &gt; <span class="el_source">Admin.java</span></div><h1>Admin.java</h1><pre class="source lang-java linenums">package com.OnlineMedicalShop.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Table(name=&quot;admins&quot;)
+<span class="fc" id="L13">public class Admin {</span>
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public int id;
+  
+    public String password;
+   
+    public String email;
+    public int getId() {
+<span class="nc" id="L22">        return id;</span>
+    }
+
+    public void setId(int Id) {
+<span class="nc" id="L26">        this.id = id;</span>
+<span class="nc" id="L27">    }</span>
+
+    public String getPassword() {
+<span class="nc" id="L30">        return password;</span>
+    }
+
+    public void setPassword(String password) {
+<span class="nc" id="L34">        this.password = password;</span>
+<span class="nc" id="L35">    }</span>
+    public String getEmail() {
+<span class="nc" id="L37">		return email;</span>
+	}
+	public void setEmail(String email) {
+<span class="nc" id="L40">		this.email = email;</span>
+<span class="nc" id="L41">	}</span>
+
+    
+
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

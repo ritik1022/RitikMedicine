@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PurchaseController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">OnlineMedicineShoppingSystem</a> &gt; <a href="index.source.html" class="el_package">com.OnlineMedicalShop.controller</a> &gt; <span class="el_source">PurchaseController.java</span></div><h1>PurchaseController.java</h1><pre class="source lang-java linenums">package com.OnlineMedicalShop.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.OnlineMedicalShop.model.Purchase;
+import com.OnlineMedicalShop.repository.CartRepository;
+import com.OnlineMedicalShop.repository.PurchaseRepository;
+import com.OnlineMedicalShop.repository.SignupRepository;
+import com.OnlineMedicalShop.service.purchaseService;
+
+@CrossOrigin(origins = &quot;http://localhost:4200&quot;, allowedHeaders = &quot;*&quot;)
+@RestController
+<span class="fc" id="L21">public class PurchaseController {</span>
+
+
+
+   @Autowired
+    PurchaseRepository purchaseRepository;
+
+
+
+   @Autowired
+    purchaseService purchaseservice;
+
+
+
+   @Autowired
+    CartRepository cartRepository;
+
+
+
+   @Autowired
+    SignupRepository signuprepo;
+
+
+
+   @GetMapping(&quot;/purchase/byEmail/{email}&quot;)
+    public List&lt;Purchase&gt; customerOrders(@PathVariable String email) {
+<span class="nc" id="L47">        return purchaseRepository.getByEmail(email);</span>
+    }
+
+
+
+   @GetMapping(&quot;/purchase/allorders&quot;)
+    public List&lt;Purchase&gt; getAllPurchase() {
+<span class="nc" id="L54">        return purchaseRepository.findAllByOrderByTransactionidAsc();</span>
+    }
+
+
+
+   @GetMapping(&quot;/purchase/search/{keyword}&quot;)
+    public List&lt;Purchase&gt; searchPurchase(@PathVariable String keyword) {
+
+
+
+<span class="nc" id="L64">       return purchaseRepository.searchPurchase(keyword);</span>
+    }
+
+
+
+   @SuppressWarnings(&quot;rawtypes&quot;)
+    @PostMapping(&quot;/purchase&quot;)
+
+
+
+   public Boolean create(@RequestBody Purchase su) {
+<span class="nc" id="L75">        purchaseRepository.save(su);</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">        if (purchaseservice.checkEntry(su.getProductname())) {</span>
+<span class="nc" id="L77">            return true;</span>
+        } else {
+<span class="nc" id="L79">            return false;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
